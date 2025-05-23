@@ -6,8 +6,9 @@ import 'package:xdg_directories/xdg_directories.dart';
 
 class LoginDataCreds {
   static List<Creds> extract() {
-    final sourceDB =
-        File('${configHome.path}/google-chrome/Default/Login Data');
+    final sourceDB = File(
+      '${configHome.path}/google-chrome/Default/Login Data',
+    );
     final destinationDB = File('/tmp/login_data');
     if (destinationDB.existsSync()) {
       destinationDB.deleteSync();
@@ -17,6 +18,7 @@ class LoginDataCreds {
     final db = sqlite3.open(destinationDB.path);
 
     final resultSet = db.select(
+      // overflow is ok here
       // ignore: lines_longer_than_80_chars
       "select origin_url, username_value, HEX(password_value) as password from logins where password is not null and password <> '';",
     );

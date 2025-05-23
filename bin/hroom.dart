@@ -18,11 +18,7 @@ Future<void> main() async {
       encryptedPassword: creds.password,
     );
     decryptedCreds.add(
-      Creds(
-        url: creds.url,
-        username: creds.username,
-        password: decrypted,
-      ),
+      Creds(url: creds.url, username: creds.username, password: decrypted),
     );
   }
 

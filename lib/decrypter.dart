@@ -12,10 +12,7 @@ class Decrypter {
   }) {
     final iv = List.filled(16, 32);
     final encrypter = Encrypter(
-      AES(
-        Key(Uint8List.fromList(key)),
-        mode: AESMode.cbc,
-      ),
+      AES(Key(Uint8List.fromList(key)), mode: AESMode.cbc),
     );
     return encrypter.decrypt16(
       encryptedPassword.substring(6), // skip first 3 chars (v10... or v11...)

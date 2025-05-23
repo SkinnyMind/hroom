@@ -24,14 +24,11 @@ class Masterkey {
       [DBusDict(DBusSignature('s'), DBusSignature('s'))],
     );
 
-    final collections = await secretService.callMethod(
-      'org.freedesktop.Secret.Service',
-      'GetSecrets',
-      [
-        DBusArray(DBusSignature('o'), items.values.first.asArray()),
-        sessionPath.values.last.asObjectPath(),
-      ],
-    );
+    final collections = await secretService
+        .callMethod('org.freedesktop.Secret.Service', 'GetSecrets', [
+          DBusArray(DBusSignature('o'), items.values.first.asArray()),
+          sessionPath.values.last.asObjectPath(),
+        ]);
 
     for (var i = 0; i < collections.values.length; i++) {
       for (final collection in collections.values[i].asDict().keys) {
